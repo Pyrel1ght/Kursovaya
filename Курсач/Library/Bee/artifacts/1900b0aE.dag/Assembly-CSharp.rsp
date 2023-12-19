@@ -361,11 +361,13 @@
 "Assets/Scripts/CameraControl.cs"
 "Assets/Scripts/CreateTarget.cs"
 "Assets/Scripts/Durability.cs"
+"Assets/Scripts/Interact.cs"
 "Assets/Scripts/MoveTarget.cs"
 "Assets/Scripts/Pickup.cs"
 "Assets/Scripts/PlayerMovement.cs"
 "Assets/Scripts/PointSystem.cs"
 "Assets/Scripts/Shoot.cs"
+"Assets/Scripts/StartGame.cs"
 -langversion:9.0
 
 /deterministic

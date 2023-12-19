@@ -11,7 +11,10 @@ public class CameraControl : MonoBehaviour
     public GameObject Camera;
 
     // Update is called once per frame
-
+    private void Start()
+    {
+        Cursor.visible = false;
+    }
     void Update()
     {
         rotationX += Input.GetAxis("Mouse X") * sens;

@@ -8,7 +8,10 @@ public class Shoot : MonoBehaviour
 {
     RaycastHit hit;
     public GameObject Camera;
+    private Animator animator;
     public GameObject Ammo;
+    private AudioSource sfx;
+    public AudioClip shoot,reload;
     public GameObject BulletSpawn;
     public ParticleSystem MuzzleFlash;
     public float TimeBetweenShots, range, reloadingTime;
@@ -18,6 +21,8 @@ public class Shoot : MonoBehaviour
     public TrailRenderer BulletTrail;
     private void Awake()
     {
+        animator = GetComponent<Animator>();
+        sfx = GetComponent<AudioSource>();
         Camera = GameObject.Find("Main Camera");
         Ammo = GameObject.Find("Ammo");
         BulletSpawn = GameObject.Find("BulletSpawn");
@@ -41,6 +46,8 @@ public class Shoot : MonoBehaviour
     private void Reload()
     {
         reloading= true;
+        animator.SetTrigger("Reloading");
+        sfx.PlayOneShot(reload, 1f);
         Invoke("ReloadFinished", reloadingTime);
     }
     private void ReloadFinished()
@@ -53,7 +60,8 @@ public class Shoot : MonoBehaviour
     private void ShootGun()
     {
         readyToShoot = false;
-        MuzzleFlash.Play(); 
+        MuzzleFlash.Play();
+        sfx.PlayOneShot(shoot, 0.5f);
         if (Physics.Raycast(Camera.transform.position, Camera.transform.forward, out hit, range))
         {
             TrailRenderer trail = Instantiate(BulletTrail, BulletSpawn.transform.position, Quaternion.identity);
@@ -65,6 +73,7 @@ public class Shoot : MonoBehaviour
                 Debug.Log(hit.collider.name);
             }
         }
+        animator.SetTrigger("Shooting");
         BulletsLeft--;
         Ammo.GetComponent<TextMeshProUGUI>().text = BulletsLeft.ToString();
         Invoke("ResetShot", TimeBetweenShots);
@@ -77,7 +86,7 @@ public class Shoot : MonoBehaviour
     {
         float timer = 0;
         Vector3 Start = trail.transform.position;
-        while (timer < 1)
+        while (timer < 1* (1/hit.distance))
         {
             trail.transform.position = Vector3.Lerp(Start, hit.point, timer);
             timer += Time.deltaTime / trail.time;
@@ -93,7 +102,7 @@ public class Shoot : MonoBehaviour
                 Instantiate(ImpactMetal, hit.point, Quaternion.LookRotation(hit.normal));
                 break;
         }
-     
+        Debug.Log(hit.distance);
         Destroy(trail.gameObject, trail.time);
     }
 }
