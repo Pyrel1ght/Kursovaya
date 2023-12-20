@@ -361,6 +361,7 @@
 "Assets/Scripts/CameraControl.cs"
 "Assets/Scripts/CreateTarget.cs"
 "Assets/Scripts/Durability.cs"
+"Assets/Scripts/GameManager.cs"
 "Assets/Scripts/Interact.cs"
 "Assets/Scripts/MoveTarget.cs"
 "Assets/Scripts/Pickup.cs"

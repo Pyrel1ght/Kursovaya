@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\MoveTarget.cs" />
     <Compile Include="Assets\Scripts\PointSystem.cs" />
     <Compile Include="Assets\Scripts\Pickup.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Interact.cs" />
     <Compile Include="Assets\Scripts\CameraControl.cs" />
     <Compile Include="Assets\Scripts\StartGame.cs" />
